@@ -1,6 +1,8 @@
 import React from 'react';
 import './todo-detail.css';
-import TodoResource from '../../api/TodoResource.js'
+import TodoResource from '../../api/TodoResource.js';
+import { Checkbox, Button } from 'antd';
+import 'antd/dist/antd.css';
 
 class TodoDetail extends React.Component{
     constructor(props){
@@ -28,7 +30,7 @@ class TodoDetail extends React.Component{
    render(){
        return(
         <li className={this.state.status}>
-            <input type="checkbox" onClick={this.changeStatus} checked={this.state.status === "completed" ? true : false} ></input>
+            <Checkbox onClick={this.changeStatus} checked={this.state.status === "completed" ? true : false} ></Checkbox>
             <span>{this.state.content}</span>
          </li>
        );

@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
         res => 
         dispatch({
           type: "ADD_TODO_LIST",
-          payload: newTodo
+          payload: {id : res.id,...newTodo, _links: res._links}
         }))
 });
 

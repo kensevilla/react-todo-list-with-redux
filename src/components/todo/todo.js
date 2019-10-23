@@ -2,6 +2,8 @@ import React from 'react';
 import TodoList from '../todo-list/todo-list';
 import './todo.css';
 import TodoResource from "../../api/TodoResource.js";
+import { Button, Input } from 'antd';
+import 'antd/dist/antd.css';
 
 class Todo extends React.Component{
     constructor(props){
@@ -33,8 +35,8 @@ class Todo extends React.Component{
         let todoList = [];
         return(
             <div className="todo">
-                <input type="text" value = {this.props.data} onChange={this.handleChange}></input>
-                <button onClick = {this.addList}>Add</button>
+                <Input type="text" value = {this.props.data} onChange={this.handleChange}></Input>
+                <Button type='primary' onClick = {this.addList}>Add</Button>
                 <ol>
                     <TodoList listDetail={this.props.todoList} />
                 </ol>

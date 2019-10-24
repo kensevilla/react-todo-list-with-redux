@@ -1,5 +1,3 @@
-import TodoDetail from "../components/todo-detail/todo-detail";
-
 export default {
     getAll: () => fetch(
       "http://localhost:8080/api/todos?size=100",

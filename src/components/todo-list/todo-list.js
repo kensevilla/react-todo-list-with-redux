@@ -1,19 +1,19 @@
 import React from 'react';
-import TodoDetail from '../todo-detail/todo-detail';
-
+import { Checkbox } from 'antd';
+import 'antd/dist/antd.css';
+import './todo-list.css';
 class TodoList extends React.Component{
     constructor(props){
         super(props);
     }
-    getList = () =>{
-        return this.props.listDetail.map(detail => <TodoDetail listDetail={detail} />);
-    }
+
     render(){
-        let listDetail = this.getList();
+        const isCompleted = this.props.listDetail.status === "completed" ? true : false;
         return(
-            <div className='todo-list'>
-                {listDetail}
-            </div>
+            <li className={this.props.listDetail.status}>
+                <Checkbox onClick = {() => this.props.whenChanged(this.props.listDetail.status, this.props.listDetail.id)} checked={isCompleted} ></Checkbox>
+                <span>{this.props.listDetail.content}</span>
+            </li>
         );
     }
 }

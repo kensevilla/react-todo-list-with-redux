@@ -20,12 +20,21 @@ const mapDispatchToProps = dispatch => ({
         dispatch({
           type: "ADD_TODO_LIST",
           payload: {id : res.id,...newTodo, _links: res._links}
-        }))
+        })),
+      updateTodo: updatedTodo =>
+      TodoResource.updateTodo(updatedTodo)
+        .then(res=>res.json())
+        .then(res => 
+      dispatch({
+        type: "UPDATE_TODO",
+        payload: updatedTodo
+      }))
 });
 
 const mapStateToProps = state => ({
     data: state.todoreducer.inputValue,
-    todoList : state.todoreducer.todoList
+    todoList : state.todoreducer.todoList,
+    todo : state.todoreducer.todo
  });
 
 export default connect(

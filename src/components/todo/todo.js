@@ -8,9 +8,6 @@ import 'antd/dist/antd.css';
 class Todo extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            todoList : []
-        };
     }
     componentDidMount = ()=>{
         TodoResource.getAll()
@@ -20,7 +17,20 @@ class Todo extends React.Component{
             console.log(res);
         });
     }
-
+    onChangeStatus = (thisStatus, thisId) =>{
+        console.log(thisStatus, thisId);
+        if(thisStatus === "active"){
+            thisStatus = "completed";
+        }
+        else{
+            thisStatus = "active";
+        }
+        let updateTodo = {
+            id : thisId,
+            status : thisStatus
+        }
+        this.props.updateTodo(updateTodo);
+    }
     addList = () => {
         let newTodo = {
             content : this.props.data,
@@ -31,14 +41,19 @@ class Todo extends React.Component{
     handleChange = (event) => {
         this.props.updateInputValue(event.target.value);
     }
+    prepareTodoList = () =>{
+        return this.props.todoList.map(detail => 
+            <TodoList listDetail={detail} whenChanged={this.onChangeStatus} />
+        );
+    }
     render(){
-        let todoList = [];
+        let todoList = this.prepareTodoList();
         return(
             <div className="todo">
                 <Input type="text" value = {this.props.data} onChange={this.handleChange}></Input>
                 <Button type='primary' onClick = {this.addList}>Add</Button>
                 <ol>
-                    <TodoList listDetail={this.props.todoList} />
+                    {todoList}
                 </ol>
             </div>
         );
